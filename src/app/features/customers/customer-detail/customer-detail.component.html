@@ -1,0 +1,105 @@
+<ng-container *ngIf="user$ | async as user; else notFound">
+  <!-- Header / Profile -->
+  <mat-card class="profile-card">
+    <div class="profile">
+      <div class="avatar" aria-hidden="true">{{ initials(user) }}</div>
+
+      <div class="profile__info">
+        <h2 class="profile__name">{{ user.firstName }} {{ user.lastName }}</h2>
+        <div class="profile__sub">
+          <span>{{ user.email || "—" }}</span>
+        </div>
+      </div>
+
+      <!-- 3 dots menu -->
+      <button
+        mat-icon-button
+        class="menu-btn"
+        [matMenuTriggerFor]="menu"
+        aria-label="More actions"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="edit(user)">
+          <mat-icon>edit</mat-icon>
+          <span>Edit</span>
+        </button>
+        <button mat-menu-item (click)="delete(user)">
+          <mat-icon>delete</mat-icon>
+          <span>Delete</span>
+        </button>
+      </mat-menu>
+    </div>
+
+    <div class="profile-actions">
+      <a mat-stroked-button routerLink="/customers">
+        <mat-icon>arrow_back</mat-icon>
+        Back
+      </a>
+    </div>
+  </mat-card>
+
+  <!-- Content Cards -->
+  <div class="cards">
+    <mat-card class="info-card">
+      <mat-card-header>
+        <mat-card-title>Contact</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="grid">
+        <div class="item">
+          <div class="label">Email</div>
+          <div class="value">{{ user.email || "—" }}</div>
+        </div>
+        <div class="item">
+          <div class="label">Status</div>
+          <div class="value">{{ user.status || "lead" }}</div>
+        </div>
+        <div class="item">
+          <div class="label">Birth date</div>
+
+          <div class="value">
+            <ng-container *ngIf="user.birthDate as bd; else noBirthdate">
+              {{ (bd.toDate ? bd.toDate() : bd) | date : "dd.MM.yyyy" }}
+            </ng-container>
+
+            <ng-template #noBirthdate>—</ng-template>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="info-card">
+      <mat-card-header>
+        <mat-card-title>Address</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="grid">
+        <div class="item">
+          <div class="label">Street</div>
+          <div class="value">{{ user.street || "—" }}</div>
+        </div>
+        <div class="item">
+          <div class="label">ZIP</div>
+          <div class="value">{{ user.zipCode || "—" }}</div>
+        </div>
+        <div class="item">
+          <div class="label">City</div>
+          <div class="value">{{ user.city || "—" }}</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</ng-container>
+
+<ng-template #notFound>
+  <mat-card>
+    <h2>User not found</h2>
+    <p>This customer does not exist (or was deleted).</p>
+
+    <a mat-stroked-button routerLink="/customers">
+      <mat-icon>arrow_back</mat-icon>
+      Back to list
+    </a>
+  </mat-card>
+</ng-template>

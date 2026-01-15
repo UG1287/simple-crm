@@ -1,0 +1,50 @@
+.shell {
+  height: 100vh;
+}
+
+.shell__sidenav {
+  width: 280px;
+}
+
+.brand-logo {
+  height: 63px;
+  width: 110px;
+  padding-left: 48px;
+}
+
+.shell__logo {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.shell__subtitle {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.shell__toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.shell__menu-btn {
+  margin-right: 8px;
+}
+
+.shell__title {
+  font-weight: 600;
+}
+
+.shell__spacer {
+  flex: 1 1 auto;
+}
+
+.shell__main {
+  padding: 16px;
+}
+
+.is-active {
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.08);
+}

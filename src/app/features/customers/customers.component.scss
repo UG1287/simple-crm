@@ -1,0 +1,159 @@
+/* Theme-aware table tokens */
+:host {
+  --row-hover: rgba(0, 0, 0, 0.04);
+  --row-alt: rgba(0, 0, 0, 0.02);
+  --row-divider: rgba(0, 0, 0, 0.08);
+  --header-bg: rgba(255, 255, 255, 0.85);
+}
+
+:host-context(html.theme-dark) {
+  --row-hover: rgba(255, 255, 255, 0.06);
+  --row-alt: rgba(255, 255, 255, 0.02);
+  --row-divider: rgba(255, 255, 255, 0.08);
+  --header-bg: rgba(0, 0, 0, 0.25);
+}
+
+.list-card {
+  padding: 12px;
+}
+
+.list-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 4px 12px;
+}
+
+.list-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.list-subtitle {
+  margin: 4px 0 0;
+  opacity: 0.75;
+  font-size: 13px;
+}
+
+.filter {
+  width: 320px;
+  max-width: 100%;
+}
+
+.table-wrap {
+  position: relative;
+  overflow: auto;
+  border-radius: 12px;
+}
+
+/* Table base */
+.crm-table {
+  width: 100%;
+  border-spacing: 0;
+}
+
+/* Header */
+.crm-table th.mat-mdc-header-cell {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  background: var(--header-bg);
+  backdrop-filter: blur(8px);
+}
+
+/* Spacing */
+.crm-table th.mat-mdc-header-cell,
+.crm-table td.mat-mdc-cell {
+  padding: 12px 16px;
+  white-space: nowrap;
+}
+
+/* Row styling */
+.crm-row {
+  transition: background-color 120ms ease;
+}
+.crm-row:hover {
+  background: var(--row-hover);
+}
+.crm-row:nth-child(even) {
+  background: var(--row-alt);
+}
+
+/* Divider lines */
+.crm-table tr.mat-mdc-row {
+  border-bottom: 1px solid var(--row-divider);
+}
+.crm-table tr.mat-mdc-row:last-child {
+  border-bottom: none;
+}
+
+/* Click feel */
+.crm-row td:not(.cell-actions) {
+  cursor: pointer;
+}
+
+/* Column tweaks */
+.cell-name {
+  min-width: 220px;
+  white-space: normal;
+}
+.name__main {
+  font-weight: 600;
+}
+
+.cell-email {
+  min-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cell-actions {
+  width: 56px;
+  text-align: right;
+}
+
+/* Status chips (simple + readable both themes) */
+.cell-status mat-chip {
+  font-weight: 600;
+}
+
+.chip--lead {
+  opacity: 0.85;
+}
+.chip--customer {
+  opacity: 0.95;
+}
+.chip--vip {
+  opacity: 1;
+}
+
+/* Empty state */
+.empty {
+  padding: 16px;
+  text-align: center;
+  opacity: 0.85;
+}
+.empty__title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.empty__text {
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+/* FAB */
+.add-customer-btn {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1000;
+
+  @media (min-width: 768px) {
+    right: 56px;
+    bottom: 56px;
+  }
+}

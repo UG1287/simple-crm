@@ -1,0 +1,32 @@
+.loading {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.loading mat-progress-bar {
+  border-radius: 0;
+}
+
+
+.form {
+  display: grid;
+  gap: 12px;
+  padding-top: 6px;
+}
+
+.row {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+
+.field {
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .row {
+    grid-template-columns: 1fr 1fr;
+  }
+}

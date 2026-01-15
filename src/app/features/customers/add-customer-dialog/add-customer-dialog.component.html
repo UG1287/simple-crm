@@ -1,0 +1,127 @@
+<div class="loading" *ngIf="isSaving">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<h2 mat-dialog-title>Add customer</h2>
+
+<form #f="ngForm" (ngSubmit)="save(f)">
+  <div mat-dialog-content class="form">
+    <div class="row">
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>First name</mat-label>
+        <input
+          matInput
+          [(ngModel)]="customer.firstName"
+          name="firstName"
+          required
+          minlength="2"
+          [disabled]="isSaving"
+          #firstName="ngModel"
+        />
+        <mat-error *ngIf="firstName.touched && firstName.hasError('required')">
+          First name is required
+        </mat-error>
+        <mat-error *ngIf="firstName.touched && firstName.hasError('minlength')">
+          Minimum 2 characters
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Last name</mat-label>
+        <input
+          matInput
+          [(ngModel)]="customer.lastName"
+          name="lastName"
+          required
+          minlength="2"
+          [disabled]="isSaving"
+          #lastName="ngModel"
+        />
+        <mat-error *ngIf="lastName.touched && lastName.hasError('required')">
+          Last name is required
+        </mat-error>
+        <mat-error *ngIf="lastName.touched && lastName.hasError('minlength')">
+          Minimum 2 characters
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        [(ngModel)]="customer.email"
+        name="email"
+        required
+        email
+        autocomplete="email"
+        [disabled]="isSaving"
+        #emailModel="ngModel"
+      />
+      <mat-error *ngIf="emailModel.touched && emailModel.hasError('required')">
+        Email is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>Birth date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [(ngModel)]="customer.birthDate"
+        [disabled]="isSaving"
+        name="birthDate"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+        [disabled]="isSaving"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>ZIP</mat-label>
+        <input
+          matInput
+          [(ngModel)]="customer.zipCode"
+          name="zipCode"
+          [disabled]="isSaving"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>City</mat-label>
+        <input
+          matInput
+          [(ngModel)]="customer.city"
+          name="city"
+          required
+          [disabled]="isSaving"
+          #city="ngModel"
+        />
+        <mat-error *ngIf="city.touched && city.hasError('required')">
+          City is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>Street / House number</mat-label>
+      <input
+        matInput
+        [(ngModel)]="customer.street"
+        name="street"
+        [disabled]="isSaving"
+      />
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="close()" [disabled]="isSaving">Cancel</button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="isSaving">
+      Save
+    </button>
+  </div>
+</form>
